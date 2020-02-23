@@ -20,9 +20,6 @@ autocmd FileType apache setlocal commentstring=#\ %s
 " Julia
 autocmd BufRead,BufNewFile *.jl setlocal commentstring=#\ %s
 
-
-
-
 inoremap jk <ESC>
 vnoremap jk <ESC>
 
