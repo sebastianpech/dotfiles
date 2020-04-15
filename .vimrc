@@ -33,7 +33,6 @@ autocmd BufRead,BufNewFile *.jl setlocal commentstring=#\ %s
 " Mappings
 let mapleader = ","
 inoremap jk <ESC>
-vnoremap jk <ESC>
 nnoremap j gj
 
 " Use sysem clipboard
