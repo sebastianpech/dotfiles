@@ -95,3 +95,6 @@ nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 " Enable mouse
 set mouse=a
 set ttymouse=xterm2
+
+" Allow hiding of buffers
+set hidden
