@@ -141,4 +141,5 @@ end
 " Neovim Terminal
 if has("nvim")
     tnoremap <Esc> <C-\><C-n>
+    tnoremap jk <C-\><C-n>
 end
