@@ -11,14 +11,17 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-sensible'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-repeat'
-    Plug 'tomasiser/vim-code-dark'
+    Plug 'morhetz/gruvbox'
     Plug 'tpope/vim-commentary'
     Plug 'vim-airline/vim-airline'
     Plug 'kien/ctrlp.vim'
     Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+    Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'JuliaEditorSupport/julia-vim'
     Plug 'jpalardy/vim-slime'
-    Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
+    if has('nvim')
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    end
 call plug#end()
 
 
@@ -39,8 +42,8 @@ nnoremap j gj
 set clipboard=unnamed
 
 " Colorscheme
-colorscheme codedark
-let g:airline_theme = 'codedark'
+colorscheme gruvbox
+let g:airline_theme = 'gruvbox'
 
 " Tabs
 filetype plugin indent on
@@ -67,34 +70,27 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " let g:slime_target = "tmux"
 let g:slime_target = "vimterminal"
 
-" Language Server
-"" language server
-let g:default_julia_version = '1.0'
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_serverCommands = {
-\   'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
-\       using LanguageServer;
-\       using Logging;
-\       using Pkg;
-\       import StaticLint;
-\       import SymbolServer;
-\       env_path = dirname(Pkg.Types.Context().env.project_file);
-\       debug = true; 
-\       logger = SimpleLogger(open("/Users/spech/test/log.log","w"));
-\       global_logger(logger);
-\       server = LanguageServer.LanguageServerInstance(stdin, stdout, debug, env_path);
-\       server.runlinter = true;
-\       run(server);
-\   ']  
-\ }
-
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
 " Enable mouse
 set mouse=a
-set ttymouse=xterm2
+if !has("nvim")
+    set ttymouse=xterm2
+end
 
 " Allow hiding of buffers
 set hidden
+
+" Completion functions for coc-nvim
+if has("nvim")
+    inoremap <silent><expr> <TAB>
+                \ pumvisible() ? coc#_select_confirm() :
+                \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+                \ <SID>check_back_space() ? "\<TAB>" :
+                \ coc#refresh()
+
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    let g:coc_snippet_next = '<tab>'
+end
