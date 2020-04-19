@@ -4,7 +4,7 @@ link_if_not_exists() {
         echo "  file already exist ... skipping linking!"
     else 
         echo "  created: $2 -> $1"
-        ln -s $1 $2
+        ln -s $(pwd)/$1 $2
     fi
     echo ""
 }
