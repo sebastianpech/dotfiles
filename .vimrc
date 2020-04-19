@@ -18,11 +18,13 @@ call plug#begin('~/.vim/plugged')
     Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'JuliaEditorSupport/julia-vim'
-    Plug 'jpalardy/vim-slime'
     if has('nvim')
         " Install node
         " curl -s https://install-node.now.sh | sh -s -- --prefix=$HOME
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        Plug 'Vigemus/iron.nvim'
+    else
+        Plug 'jpalardy/vim-slime'
     end
 call plug#end()
 
@@ -94,10 +96,7 @@ nmap <C-n> :call ToggleNerdTree()<CR>
 
 
 " Vim slime
-" let g:slime_target = "tmux"
-if has("nvim")
-    let g:slime_target = "neovim"
-else
+if !has("nvim")
     let g:slime_target = "vimterminal"
 end
 
@@ -127,4 +126,19 @@ if has("nvim")
     endfunction
 
     let g:coc_snippet_next = '<tab>'
+end
+
+" Fugitive
+nnoremap <leader>g :Git<CR>
+
+" Iron
+if has("nvim")
+    nmap <C-c><C-c> <Plug>(iron-send-line)
+    vmap <C-c><C-c> <Plug>(iron-visual-send)
+    let g:iron_repl_open_cmd = 'hsplit'
+end
+
+" Neovim Terminal
+if has("nvim")
+    tnoremap <Esc> <C-\><C-n>
 end
