@@ -20,6 +20,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'JuliaEditorSupport/julia-vim'
     Plug 'jpalardy/vim-slime'
     if has('nvim')
+        " Install node
+        " curl -s https://install-node.now.sh | sh -s -- --prefix=$HOME
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
     end
 call plug#end()
