@@ -95,7 +95,11 @@ nmap <C-n> :call ToggleNerdTree()<CR>
 
 " Vim slime
 " let g:slime_target = "tmux"
-let g:slime_target = "vimterminal"
+if has("nvim")
+    let g:slime_target = "neovim"
+else
+    let g:slime_target = "vimterminal"
+end
 
 " Enable mouse
 set mouse=a
