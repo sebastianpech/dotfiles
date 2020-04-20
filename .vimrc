@@ -36,6 +36,7 @@ call plug#begin('~/.vim/plugged')
     else
         Plug 'jpalardy/vim-slime'
     end
+    Plug 'lervag/vimtex'
 call plug#end()
 
 
@@ -156,3 +157,9 @@ if has("nvim")
     tnoremap <Esc> <C-\><C-n>
     tnoremap jk <C-\><C-n>
 end
+
+" vimtex
+if has('nvim')
+    let g:vimtex_compiler_progname = 'nvr'
+end
+let g:tex_flavor = 'latex'
