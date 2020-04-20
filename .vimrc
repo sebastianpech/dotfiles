@@ -5,11 +5,13 @@
 " Installing neovim remote
 "   pip3 install neovim-remote
 "
+" Install for Mundo
+"   pip3 install pynvim
+"
 " Installing coc-texlab
 "   CocInstall coc-texlab
 "
 " Auto install vim-plug
-
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -30,6 +32,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'JuliaEditorSupport/julia-vim'
     Plug 'jremmen/vim-ripgrep'
+    Plug 'simnalamburt/vim-mundo'
     if has('nvim')
         " Install node
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
