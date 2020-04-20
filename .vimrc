@@ -29,6 +29,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'JuliaEditorSupport/julia-vim'
+    Plug 'jremmen/vim-ripgrep'
     if has('nvim')
         " Install node
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
