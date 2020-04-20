@@ -39,8 +39,11 @@ autocmd BufRead,BufNewFile *.jl setlocal commentstring=#\ %s
 
 " Mappings
 let mapleader = ","
+let maplocalleader = ","
 inoremap jk <ESC>
 nnoremap j gj
+" Change directory to current files
+nnoremap <leader>cd :cd %:p:h<CR>
 
 " Use sysem clipboard
 set clipboard=unnamed
