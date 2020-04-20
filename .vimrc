@@ -1,4 +1,15 @@
+" Additional installs needed
+" Installing node for iron
+"   curl -s https://install-node.now.sh | sh -s -- --prefix=$HOME
+"
+" Installing neovim remote
+"   pip3 install neovim-remote
+"
+" Installing coc-texlab
+"   CocInstall coc-texlab
+"
 " Auto install vim-plug
+
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -20,7 +31,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'JuliaEditorSupport/julia-vim'
     if has('nvim')
         " Install node
-        " curl -s https://install-node.now.sh | sh -s -- --prefix=$HOME
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
         Plug 'Vigemus/iron.nvim'
     else
