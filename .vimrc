@@ -167,3 +167,11 @@ if has('nvim')
     let g:vimtex_compiler_progname = 'nvr'
 end
 let g:tex_flavor = 'latex'
+
+" Searching
+set ignorecase
+set smartcase
+if has("nvim") 
+  set inccommand=nosplit
+endif
+nnoremap g* *Ncgn
