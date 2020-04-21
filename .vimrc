@@ -175,3 +175,6 @@ if has("nvim")
   set inccommand=nosplit
 endif
 nnoremap g* *Ncgn
+
+" Folding
+set foldmethod=marker
