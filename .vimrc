@@ -51,6 +51,8 @@ autocmd GUIEnter * set visualbell t_vb=
 " tpope/vim-commentary
 " Julia
 autocmd BufRead,BufNewFile *.jl setlocal commentstring=#\ %s
+let g:latex_to_unicode_tab = 0
+let g:latex_to_unicode_auto = 1
 
 " Mappings
 let mapleader = ","
