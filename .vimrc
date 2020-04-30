@@ -41,6 +41,10 @@ call plug#begin('~/.vim/plugged')
         Plug 'jpalardy/vim-slime'
     end
     Plug 'lervag/vimtex'
+    Plug 'vim-pandoc/vim-pandoc'
+    Plug 'godlygeek/tabular'
+    Plug 'plasticboy/vim-markdown'
+    Plug 'ferrine/md-img-paste.vim'
 call plug#end()
 
 
@@ -180,3 +184,11 @@ nnoremap g* *Ncgn
 
 " Folding
 set foldmethod=marker
+
+" Markdown
+
+"image paste
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
+let g:pandoc#filetypes#pandoc_markdown = 0
