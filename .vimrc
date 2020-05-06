@@ -65,7 +65,7 @@ let maplocalleader = ","
 inoremap jk <ESC>
 nnoremap j gj
 " Change directory to current files
-nnoremap <leader>cd :cd %:p:h<CR>
+nnoremap <localleader>wd :cd %:p:h<CR>:pwd<CR>
 
 " Use sysem clipboard
 set clipboard=unnamed
