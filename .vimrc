@@ -42,6 +42,7 @@ call plug#begin('~/.vim/plugged')
     end
     Plug 'lervag/vimtex'
     Plug 'vim-pandoc/vim-pandoc'
+    Plug 'vim-pandoc/vim-pandoc-syntax'
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown'
     Plug 'ferrine/md-img-paste.vim'
@@ -189,7 +190,8 @@ set foldmethod=marker
 " Markdown
 
 "image paste
-autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
-au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
-let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
-let g:pandoc#filetypes#pandoc_markdown = 0
+autocmd FileType pandoc nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+autocmd FileType pandoc nmap <buffer><silent> <leader>ll :Pandoc #default<CR>
+" au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+" let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
+" let g:pandoc#filetypes#pandoc_markdown = 0
