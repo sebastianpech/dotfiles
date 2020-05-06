@@ -190,6 +190,8 @@ set foldmethod=marker
 "image paste
 autocmd FileType pandoc nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 autocmd FileType pandoc nmap <buffer><silent> <leader>ll :Pandoc #default<CR>
+" let g:pandoc#biblio#bibs = ['~/m/Literatur/Literatur.bib']
+let g:pandoc#biblio#bibs = ['/Users/spech/m/Literatur/Literatur.bib']
 " au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 " let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
 " let g:pandoc#filetypes#pandoc_markdown = 0
