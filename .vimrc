@@ -27,11 +27,11 @@ call plug#begin('~/.vim/plugged')
     Plug 'morhetz/gruvbox'
     Plug 'tpope/vim-commentary'
     Plug 'vim-airline/vim-airline'
-    Plug 'kien/ctrlp.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'JuliaEditorSupport/julia-vim'
-    Plug 'jremmen/vim-ripgrep'
     Plug 'simnalamburt/vim-mundo'
     if has('nvim')
         " Install node
@@ -159,7 +159,13 @@ nnoremap <leader>g :Git<CR>
 if has("nvim")
     nmap <C-c><C-c> <Plug>(iron-send-line)
     vmap <C-c><C-c> <Plug>(iron-visual-send)
-    let g:iron_repl_open_cmd = 'hsplit'
+lua << EOF
+    local iron = require("iron")
+    iron.core.set_config{
+        preferred = {},
+        repl_open_cmd = "botright 13 split"
+    }
+EOF
 end
 
 " Neovim Terminal
@@ -186,6 +192,11 @@ nnoremap g* *Ncg
 set foldmethod=marker
 
 " Markdown
+
+"fzf
+
+nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
 
 "image paste
 autocmd FileType pandoc nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
