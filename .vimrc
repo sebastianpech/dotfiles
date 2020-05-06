@@ -149,7 +149,8 @@ if has("nvim")
         return !col || getline('.')[col - 1]  =~# '\s'
     endfunction
 
-    let g:coc_snippet_next = '<tab>'
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gr <Plug>(coc-references)
 end
 
 " Fugitive
@@ -180,7 +181,7 @@ set smartcase
 if has("nvim") 
   set inccommand=nosplit
 endif
-nnoremap g* *Ncgn
+nnoremap g* *Ncg
 
 " Folding
 set foldmethod=marker
