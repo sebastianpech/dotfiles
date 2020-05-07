@@ -46,6 +46,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown'
     Plug 'ferrine/md-img-paste.vim'
+    Plug 'voldikss/vim-floaterm'
 call plug#end()
 
 
@@ -188,3 +189,7 @@ let g:pandoc#biblio#bibs = ['/Users/spech/m/Literatur/Literatur.bib']
 " au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 " let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
 " let g:pandoc#filetypes#pandoc_markdown = 0
+
+" Floaterm
+
+let g:floaterm_keymap_toggle = '<Leader>t'
