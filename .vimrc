@@ -191,5 +191,31 @@ let g:pandoc#biblio#bibs = ['/Users/spech/m/Literatur/Literatur.bib']
 " let g:pandoc#filetypes#pandoc_markdown = 0
 
 " Floaterm
+if has('nvim-0.4.0')
+    let g:floaterm_keymap_toggle = '<Leader>t'
+else
+    let s:term_buf = 0
+    let s:term_win = 0
 
-let g:floaterm_keymap_toggle = '<Leader>t'
+    function! TermToggle(height)
+        if win_gotoid(s:term_win)
+            hide
+        else
+            new terminal
+            exec "resize ".a:height
+            try
+                exec "buffer ".s:term_buf
+                exec "bd terminal"
+            catch
+                call termopen($SHELL, {"detach": 0})
+                let s:term_buf = bufnr("")
+                setlocal nonu nornu scl=no nocul
+            endtry
+            startinsert!
+            let s:term_win = win_getid()
+        endif
+    endfunction
+
+    nnoremap <silent><Leader>t :call TermToggle(12)<CR>
+    tnoremap <silent><Leader>t <C-\><C-n>:call TermToggle(12)<CR>
+end
