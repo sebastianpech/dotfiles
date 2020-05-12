@@ -47,6 +47,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'plasticboy/vim-markdown'
     Plug 'ferrine/md-img-paste.vim'
     Plug 'voldikss/vim-floaterm'
+    Plug 'tpope/vim-obsession'
 call plug#end()
 
 
