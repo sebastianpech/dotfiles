@@ -13,5 +13,8 @@
                 "filetypes": ["pandoc"]
             }
         }
+    },
+    "python": {
+        "jediEnabled": false
     }
 }
