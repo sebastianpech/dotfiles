@@ -220,3 +220,7 @@ else
     nnoremap <silent><Leader>t :call TermToggle(12)<CR>
     tnoremap <silent><Leader>t <C-\><C-n>:call TermToggle(12)<CR>
 end
+
+" Virtual edit mode to 
+" allow wider block selection
+set virtualedit=all
