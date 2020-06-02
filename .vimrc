@@ -48,6 +48,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'ferrine/md-img-paste.vim'
     Plug 'voldikss/vim-floaterm'
     Plug 'tpope/vim-obsession'
+    Plug 'nathangrigg/vim-beancount'
 call plug#end()
 
 
@@ -164,6 +165,17 @@ if has('nvim')
 end
 let g:tex_flavor = 'latex'
 
+" zotero
+function! ZoteroCite()
+  " pick a format based on the filetype (customize at will)
+  let format = &filetype =~ '.*tex' ? 'citep' : 'pandoc'
+  let api_call = 'http://127.0.0.1:23119/better-bibtex/cayw?format='.format.'&brackets=1'
+  let ref = system('curl -s '.shellescape(api_call))
+  return ref
+endfunction
+
+noremap <leader>z "=ZoteroCite()<CR>p
+
 " Searching
 set ignorecase
 set smartcase
@@ -220,7 +232,3 @@ else
     nnoremap <silent><Leader>t :call TermToggle(12)<CR>
     tnoremap <silent><Leader>t <C-\><C-n>:call TermToggle(12)<CR>
 end
-
-" Virtual edit mode to 
-" allow wider block selection
-set virtualedit=all
