@@ -21,4 +21,24 @@ fkill() {
     fi  
 }
 
+# Extension for the DrWatsonSim tool
+# This lists all currently running simulations and allows to kill them
+
+get_simfolder() {
+    full=$(strings /proc/$1/environ | grep SIMULATION_FOLDER)
+    if [[ $full != "" ]]; then
+        echo $1 ${full:18}
+    fi
+}
+
+get_all_simfolder() {
+    for pid in $(pgrep -f julia); do
+        get_simfolder $pid
+    done
+}
+
+simkill() {
+    kill $(get_all_simfolder | fzf | awk '{print $1}')
+}
+
 export PATH=~/.scripts:$PATH
