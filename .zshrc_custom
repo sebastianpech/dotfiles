@@ -38,7 +38,7 @@ get_all_simfolder() {
 }
 
 simkill() {
-    kill $(get_all_simfolder | fzf | awk '{print $1}')
+    kill $(get_all_simfolder | fzf -m | awk '{print $1}')
 }
 
 export PATH=~/.scripts:$PATH
