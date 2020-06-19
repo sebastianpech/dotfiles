@@ -33,6 +33,11 @@ call plug#begin('~/.vim/plugged')
     Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'JuliaEditorSupport/julia-vim'
     Plug 'simnalamburt/vim-mundo'
+    if has('nvim') || has('patch-8.0.902')
+      Plug 'mhinz/vim-signify'
+    else
+      Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+    endif
     if has('nvim')
         " Install node
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
