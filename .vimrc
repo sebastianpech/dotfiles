@@ -8,9 +8,6 @@
 " Install for Mundo
 "   pip3 install pynvim
 "
-" Installing coc-texlab
-"   CocInstall coc-texlab
-"
 " Auto install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -39,8 +36,10 @@ call plug#begin('~/.vim/plugged')
       Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
     endif
     if has('nvim')
-        " Install node
-        Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+        Plug 'Shougo/deoplete-lsp'
+        Plug 'neovim/nvim-lsp'
+        let g:deoplete#enable_at_startup = 1
         Plug 'Vigemus/iron.nvim'
     else
         Plug 'jpalardy/vim-slime'
@@ -129,17 +128,17 @@ set rnu
 
 " Completion functions for coc-nvim
 if has("nvim")
-    nnoremap <silent> gD :call <SID>show_documentation()<CR>
-    function! s:show_documentation()
-      if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-      else
-        call CocAction('doHover')
-      endif
-    endfunction
+lua << EOF
+    require'nvim_lsp'.julials.setup{}
+EOF
 
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gr <Plug>(coc-references)
+set completeopt-=preview
+autocmd Filetype julia setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 end
 
 " Fugitive
