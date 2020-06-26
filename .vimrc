@@ -54,6 +54,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'voldikss/vim-floaterm'
     Plug 'tpope/vim-obsession'
     Plug 'nathangrigg/vim-beancount'
+    Plug 'stefandtw/quickfix-reflector.vim'
 call plug#end()
 
 
