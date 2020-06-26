@@ -39,6 +39,7 @@ call plug#begin('~/.vim/plugged')
         Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
         Plug 'Shougo/deoplete-lsp'
         Plug 'neovim/nvim-lsp'
+        Plug 'haorenW1025/diagnostic-nvim'
         let g:deoplete#enable_at_startup = 1
         Plug 'Vigemus/iron.nvim'
     else
@@ -130,7 +131,11 @@ set rnu
 if has("nvim")
 lua << EOF
     require'nvim_lsp'.julials.setup{}
+    require'nvim_lsp'.julials.setup{on_attach=require'diagnostic'.on_attach}
 EOF
+
+
+nnoremap <silent> <leader>ld :lua vim.lsp.util.show_line_diagnostics()<CR>
 
 set completeopt-=preview
 autocmd Filetype julia setlocal omnifunc=v:lua.vim.lsp.omnifunc
@@ -139,6 +144,12 @@ nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+
+call sign_define("LspDiagnosticsErrorSign", {"text" : "E", "texthl" : "LspDiagnosticsError"})
+call sign_define("LspDiagnosticsWarningSign", {"text" : "W", "texthl" : "LspDiagnosticsWarning"})
+call sign_define("LspDiagnosticsInformationSign", {"text" : "I", "texthl" : "LspDiagnosticsInformation"})
+call sign_define("LspDiagnosticsHintSign", {"text" : "H", "texthl" : "LspDiagnosticsHint"})
+
 end
 
 " Fugitive
