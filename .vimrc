@@ -55,6 +55,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-obsession'
     Plug 'nathangrigg/vim-beancount'
     Plug 'stefandtw/quickfix-reflector.vim'
+    Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 
 
@@ -248,3 +249,12 @@ else
     nnoremap <silent><Leader>t :call TermToggle(12)<CR>
     tnoremap <silent><Leader>t <C-\><C-n>:call TermToggle(12)<CR>
 end
+
+" Indent guid lines
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_color_change_percent = 1
+let g:indent_guides_exclude_filetypes = ['help', 'fzf', 'openterm', 'neoterm', 'calendar']
+
+set signcolumn=yes
