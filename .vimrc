@@ -36,11 +36,9 @@ call plug#begin('~/.vim/plugged')
       Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
     endif
     if has('nvim')
-        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-        Plug 'Shougo/deoplete-lsp'
         Plug 'neovim/nvim-lsp'
-        Plug 'haorenW1025/diagnostic-nvim'
-        let g:deoplete#enable_at_startup = 1
+        Plug 'nvim-lua/completion-nvim'
+        Plug 'nvim-lua/diagnostic-nvim'
         Plug 'Vigemus/iron.nvim'
     else
         Plug 'jpalardy/vim-slime'
@@ -131,26 +129,39 @@ set rnu
 
 " Completion functions for coc-nvim
 if has("nvim")
+autocmd BufEnter * lua require'completion'.on_attach()
+
 lua << EOF
-    require'nvim_lsp'.julials.setup{}
-    require'nvim_lsp'.julials.setup{on_attach=require'diagnostic'.on_attach}
+    local nvim_lsp = require'nvim_lsp'
+    local on_attach_vim = function()
+        require'diagnostic'.on_attach()
+    end
+    nvim_lsp.julials.setup({on_attach=on_attach_vim})
 EOF
 
+    let g:diagnostic_auto_popup_while_jump = 0
+    let g:diagnostic_enable_virtual_text = 0
+    let g:diagnostic_enable_underline = 0
+    let g:completion_timer_cycle = 200 "default value is 80
 
-nnoremap <silent> <leader>ld :lua vim.lsp.util.show_line_diagnostics()<CR>
+    nnoremap <silent> <leader>ld :lua vim.lsp.util.show_line_diagnostics()<CR>
 
-set completeopt-=preview
-autocmd Filetype julia setlocal omnifunc=v:lua.vim.lsp.omnifunc
+    " Set completeopt to have a better completion experience
+    set completeopt=menuone,noinsert,noselect
 
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+    " Avoid showing message extra message when using completion
+    set shortmess+=c
+    autocmd Filetype julia setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
-call sign_define("LspDiagnosticsErrorSign", {"text" : "E", "texthl" : "LspDiagnosticsError"})
-call sign_define("LspDiagnosticsWarningSign", {"text" : "W", "texthl" : "LspDiagnosticsWarning"})
-call sign_define("LspDiagnosticsInformationSign", {"text" : "I", "texthl" : "LspDiagnosticsInformation"})
-call sign_define("LspDiagnosticsHintSign", {"text" : "H", "texthl" : "LspDiagnosticsHint"})
+    nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+    nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+    nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+    nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+
+    call sign_define("LspDiagnosticsErrorSign", {"text" : "E", "texthl" : "LspDiagnosticsError"})
+    call sign_define("LspDiagnosticsWarningSign", {"text" : "W", "texthl" : "LspDiagnosticsWarning"})
+    call sign_define("LspDiagnosticsInformationSign", {"text" : "I", "texthl" : "LspDiagnosticsInformation"})
+    call sign_define("LspDiagnosticsHintSign", {"text" : "H", "texthl" : "LspDiagnosticsHint"})
 
 end
 
