@@ -54,6 +54,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'nathangrigg/vim-beancount'
     Plug 'stefandtw/quickfix-reflector.vim'
     Plug 'nathanaelkane/vim-indent-guides'
+    Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 call plug#end()
 
 
@@ -137,6 +138,7 @@ lua << EOF
         require'diagnostic'.on_attach()
     end
     nvim_lsp.julials.setup({on_attach=on_attach_vim})
+    nvim_lsp.pyls.setup{}
 EOF
 
     let g:diagnostic_auto_popup_while_jump = 0
