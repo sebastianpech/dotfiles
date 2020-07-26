@@ -55,6 +55,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'stefandtw/quickfix-reflector.vim'
     Plug 'nathanaelkane/vim-indent-guides'
     Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+    Plug 'szw/vim-g'
 call plug#end()
 
 
@@ -271,3 +272,5 @@ let g:indent_guides_color_change_percent = 1
 let g:indent_guides_exclude_filetypes = ['help', 'fzf', 'openterm', 'neoterm', 'calendar']
 
 set signcolumn=yes
+
+nnoremap go :Google<CR>
