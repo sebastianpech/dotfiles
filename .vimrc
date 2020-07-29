@@ -56,6 +56,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'nathanaelkane/vim-indent-guides'
     Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
     Plug 'szw/vim-g'
+    Plug 'Raimondi/delimitMate'
 call plug#end()
 
 
