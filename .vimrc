@@ -75,6 +75,7 @@ let mapleader = ","
 let maplocalleader = ","
 inoremap jk <ESC>
 nnoremap j gj
+nnoremap k gk
 " Change directory to current files
 nnoremap <localleader>wd :cd %:p:h<CR>:pwd<CR>
 
