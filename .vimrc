@@ -129,7 +129,7 @@ set rnu
 
 " Completion functions for coc-nvim
 if has("nvim")
-autocmd BufEnter * lua require'completion'.on_attach()
+    autocmd BufEnter * lua require'completion'.on_attach()
 
 lua << EOF
     local nvim_lsp = require'nvim_lsp'
@@ -137,8 +137,8 @@ lua << EOF
         require'diagnostic'.on_attach()
     end
     nvim_lsp.julials.setup({on_attach=on_attach_vim})
-    nvim_lsp.pyls.setup{}
-    nvim_lsp.texlab.setup{}
+    nvim_lsp.pyls.setup({on_attach=on_attach_vim})
+    nvim_lsp.texlab.setup({on_attach=on_attach_vim})
 EOF
 
     let g:diagnostic_auto_popup_while_jump = 0
