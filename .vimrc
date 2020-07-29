@@ -221,6 +221,7 @@ set foldmethod=marker
 
 "fzf
 
+nnoremap <silent> <leader>r :History<CR>
 nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 
