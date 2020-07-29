@@ -9,6 +9,7 @@
 "   pip3 install pynvim
 "
 " Auto install vim-plug
+"
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -48,7 +49,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-pandoc/vim-pandoc-syntax'
     Plug 'godlygeek/tabular'
     Plug 'plasticboy/vim-markdown'
-    Plug 'ferrine/md-img-paste.vim'
     Plug 'voldikss/vim-floaterm'
     Plug 'tpope/vim-obsession'
     Plug 'nathangrigg/vim-beancount'
@@ -57,6 +57,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
     Plug 'szw/vim-g'
     Plug 'Raimondi/delimitMate'
+    Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 
@@ -274,3 +275,10 @@ let g:indent_guides_exclude_filetypes = ['help', 'fzf', 'openterm', 'neoterm', '
 set signcolumn=yes
 
 nnoremap go :Google<CR>
+
+
+" Persisten undo
+"" Enable persistent undo so that undo history persists across vim sessions
+set undofile
+set undodir=~/.vim/undo
+nnoremap <leader>u :MundoToggle<CR>
