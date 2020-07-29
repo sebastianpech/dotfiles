@@ -140,6 +140,7 @@ lua << EOF
     end
     nvim_lsp.julials.setup({on_attach=on_attach_vim})
     nvim_lsp.pyls.setup{}
+    nvim_lsp.texlab.setup{}
 EOF
 
     let g:diagnostic_auto_popup_while_jump = 0
