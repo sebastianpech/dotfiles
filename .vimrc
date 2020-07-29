@@ -95,10 +95,6 @@ set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
 
-" CtrlP config
-nnoremap <Leader>b :CtrlPBuffer<CR>
-nnoremap <Leader>r :CtrlPMRU<CR>
-
 " Nerdtree
 " Close if last
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
