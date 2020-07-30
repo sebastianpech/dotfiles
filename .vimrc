@@ -1,7 +1,4 @@
 " Additional installs needed
-" Installing node for iron
-"   curl -s https://install-node.now.sh | sh -s -- --prefix=$HOME
-"
 " Installing neovim remote
 "   pip3 install neovim-remote
 "
@@ -59,7 +56,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'Raimondi/delimitMate'
     Plug 'sheerun/vim-polyglot'
 call plug#end()
-
 
 " Disable bell
 set noerrorbells visualbell t_vb=
@@ -275,7 +271,6 @@ let g:indent_guides_exclude_filetypes = ['help', 'fzf', 'openterm', 'neoterm', '
 set signcolumn=yes
 
 nnoremap go :Google<CR>
-
 
 " Persisten undo
 "" Enable persistent undo so that undo history persists across vim sessions
