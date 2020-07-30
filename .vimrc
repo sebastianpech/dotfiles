@@ -134,8 +134,35 @@ lua << EOF
         require'diagnostic'.on_attach()
     end
     nvim_lsp.julials.setup({on_attach=on_attach_vim})
-    nvim_lsp.pyls.setup({on_attach=on_attach_vim})
+    nvim_lsp.pyls.setup{
+          on_attach=on_attach_vim,
+          settings = {
+              pyls = {
+                  configurationSources = {
+                      pycodestyle,
+                      flake8
+                  },
+                  plugins = {
+                      mccabe = { enabled = false },
+                      preload = { enabled = true },
+                      pycodestyle = {
+                          enabled = true,
+                          ignore = { "E501" },
+                      },
+                      pydocstyle = {
+                          enabled = false,
+                      },
+                      pyflakes = { enabled = true },
+                      pylint = { enabled = false },
+                      rope_completion = { enabled = true },
+                      black = { enabled = false },
+                  }
+              }
+          }
+       }
     nvim_lsp.texlab.setup({on_attach=on_attach_vim})
+    nvim_lsp.vimls.setup({on_attach=on_attach_vim})
+    nvim_lsp.bashls.setup({on_attach=on_attach_vim})
 EOF
 
     let g:diagnostic_auto_popup_while_jump = 0
