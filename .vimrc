@@ -37,7 +37,7 @@ call plug#begin('~/.vim/plugged')
         Plug 'neovim/nvim-lsp'
         Plug 'nvim-lua/completion-nvim'
         Plug 'nvim-lua/diagnostic-nvim'
-        Plug 'Vigemus/iron.nvim'
+        Plug 'sebastianpech/term-repl'
     else
         Plug 'jpalardy/vim-slime'
     end
@@ -169,15 +169,17 @@ nnoremap <leader>g :Git<CR>
 
 " Iron
 if has("nvim")
-    nmap <C-c><C-c> <Plug>(iron-send-line)
-    vmap <C-c><C-c> <Plug>(iron-visual-send)
-lua << EOF
-    local iron = require("iron")
-    iron.core.set_config{
-        preferred = {},
-        repl_open_cmd = "botright 13 split"
-    }
-EOF
+"     nmap <C-c><C-c> <Plug>(iron-send-line)
+"     vmap <C-c><C-c> <Plug>(iron-visual-send)
+    nmap <C-c><C-c> :call SendLine()<CR>
+    vmap <C-c><C-c> :call SendLines()<CR>
+" lua << EOF
+"     local iron = require("iron")
+"     iron.core.set_config{
+"         preferred = {},
+"         repl_open_cmd = "botright 13 split"
+"     }
+" EOF
 end
 
 " Neovim Terminal
@@ -277,3 +279,7 @@ nnoremap go :Google<CR>
 set undofile
 set undodir=~/.vim/undo
 nnoremap <leader>u :MundoToggle<CR>
+
+" Python 
+"
+autocmd Filetype python let b:REPL = 'python3'
