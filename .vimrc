@@ -196,17 +196,8 @@ nnoremap <leader>g :Git<CR>
 
 " Iron
 if has("nvim")
-"     nmap <C-c><C-c> <Plug>(iron-send-line)
-"     vmap <C-c><C-c> <Plug>(iron-visual-send)
     nmap <C-c><C-c> :call SendLine()<CR>
     vmap <C-c><C-c> :call SendLines()<CR>
-" lua << EOF
-"     local iron = require("iron")
-"     iron.core.set_config{
-"         preferred = {},
-"         repl_open_cmd = "botright 13 split"
-"     }
-" EOF
 end
 
 " Neovim Terminal
