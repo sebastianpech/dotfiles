@@ -38,6 +38,8 @@ call plug#begin('~/.vim/plugged')
         Plug 'nvim-lua/completion-nvim'
         Plug 'nvim-lua/diagnostic-nvim'
         Plug 'sebastianpech/term-repl'
+        Plug 'hrsh7th/vim-vsnip'
+        Plug 'hrsh7th/vim-vsnip-integ'
     else
         Plug 'jpalardy/vim-slime'
     end
