@@ -35,8 +35,8 @@ call plug#begin('~/.vim/plugged')
     endif
     if has('nvim')
         Plug 'neovim/nvim-lsp'
+        Plug 'neovim/nvim-lspconfig'
         Plug 'nvim-lua/completion-nvim'
-        Plug 'nvim-lua/diagnostic-nvim'
         Plug 'sebastianpech/term-repl'
         Plug 'hrsh7th/vim-vsnip'
         Plug 'hrsh7th/vim-vsnip-integ'
@@ -57,6 +57,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'szw/vim-g'
     Plug 'Raimondi/delimitMate'
     Plug 'sheerun/vim-polyglot'
+    Plug 'ledger/vim-ledger'
 call plug#end()
 
 " Disable bell
@@ -131,13 +132,11 @@ if has("nvim")
     autocmd BufEnter * lua require'completion'.on_attach()
 
 lua << EOF
-    local nvim_lsp = require'nvim_lsp'
-    local on_attach_vim = function()
-        require'diagnostic'.on_attach()
-    end
+    local nvim_lsp = require'lspconfig'
+    nvim_lsp.vimls.setup({on_attach=on_attach_vim})
+    nvim_lsp.bashls.setup({on_attach=on_attach_vim})
     nvim_lsp.julials.setup({on_attach=on_attach_vim})
     nvim_lsp.pyls.setup{
-          on_attach=on_attach_vim,
           settings = {
               pyls = {
                   configurationSources = {
@@ -162,15 +161,17 @@ lua << EOF
               }
           }
        }
-    nvim_lsp.texlab.setup({on_attach=on_attach_vim})
-    nvim_lsp.vimls.setup({on_attach=on_attach_vim})
-    nvim_lsp.bashls.setup({on_attach=on_attach_vim})
 EOF
 
     let g:diagnostic_auto_popup_while_jump = 0
     let g:diagnostic_enable_virtual_text = 0
     let g:diagnostic_enable_underline = 0
     let g:completion_timer_cycle = 200 "default value is 80
+    let g:completion_matching_ignore_case = 1
+    let g:completion_enable_auto_hover = 1
+    let g:completion_enable_auto_signature = 1
+    let g:completion_enable_auto_popup = 1
+    let g:completion_matching_ignore_case = 1
 
     nnoremap <silent> <leader>ld :lua vim.lsp.util.show_line_diagnostics()<CR>
 
@@ -249,7 +250,7 @@ autocmd FileType pandoc nmap <buffer><silent> <leader>p :call mdip#MarkdownClipb
 autocmd FileType pandoc nmap <buffer><silent> <leader>ll :Pandoc #default<CR>
 " let g:pandoc#biblio#bibs = ['~/m/Literatur/Literatur.bib']
 let g:pandoc#biblio#bibs = ['/Users/spech/m/Literatur/Literatur.bib']
-" au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+au! BufNewFile,BufFilePre,BufRead *.jmd set filetype=Pandoc
 " let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
 " let g:pandoc#filetypes#pandoc_markdown = 0
 
@@ -284,6 +285,9 @@ else
 end
 
 " Indent guid lines
+let g:diagnostic_auto_popup_while_jump = 0
+let g:diagnostic_enable_virtual_text = 0
+let g:diagnostic_enable_underline = 0
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2

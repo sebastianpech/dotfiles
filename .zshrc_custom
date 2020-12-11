@@ -41,4 +41,4 @@ simkill() {
     kill $(get_all_simfolder | fzf -m | awk '{print $1}')
 }
 
-export PATH=~/.scripts:$PATH
+export PATH=~/.scripts:~/bin:$PATH
