@@ -1,0 +1,18 @@
+### First jumphost. Directly reachable
+Host dal
+  HostName dal.imws.tuwien.ac.at
+  User spech
+  RemoteCommand zsh -l
+  RequestTTY force
+ 
+### Host to jump to via jumphost1.example.org
+Host workpc
+  HostName 128.131.98.250
+  ProxyJump  dal
+  User spech
+  # ProxyCommand ssh -q dal nc %h %p
+  ProxyCommand ssh -W %h:%p dal
+
+Host lworkpc
+  HostName 128.131.98.250
+  User spech
