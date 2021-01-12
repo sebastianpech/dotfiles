@@ -14,8 +14,9 @@ mkdir -p ~/.config/nvim
 
 # Link config files
 link_if_not_exists .vimrc ~/.vimrc
-link_if_not_exists init.vim ~/.config/nvim/init.vim
-link_if_not_exists coc-settings.json ~/.config/nvim/coc-settings.json
+# link_if_not_exists init.vim ~/.config/nvim/init.vim
+# link_if_not_exists coc-settings.json ~/.config/nvim/coc-settings.json
+link_if_not_exists .gitconfig ~/.gitconfig
 
 
 
