@@ -1,8 +1,15 @@
+if hostname=Sebastians-MacBook-Pro.local
+then
+    export EDITOR="code --wait"
+    export VISUAL="code --wait"
+else
+    export EDITOR="vim"
+fi
+
 alias jl="julia"
 alias gv="git log --graph --full-history --all --color --decorate --pretty=format:\"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s\""
 alias julia="julia --color=yes"
 alias dw="julia --color=yes -i -e 'using DrWatson; @quickactivate'"
-
 
 # fzf
 
@@ -41,4 +48,6 @@ simkill() {
     kill $(get_all_simfolder | fzf -m | awk '{print $1}')
 }
 
-export PATH=~/.scripts:~/bin:$PATH
+export PATH=~/m/Scripts:~/bin:$PATH
+
+PROMPT='%{$fg_bold[white]%}%M'$PROMPT

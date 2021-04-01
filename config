@@ -4,10 +4,16 @@ Host dal
   User spech
   RemoteCommand zsh -l
   RequestTTY force
+
+Host cluster
+  HostName cluster.imws.tuwien.ac.at
+  User spech
+  RemoteCommand zsh -l
+  RequestTTY force
  
 ### Host to jump to via jumphost1.example.org
 Host workpc
-  HostName 128.131.98.250
+  HostName lws69
   ProxyJump  dal
   User spech
   # ProxyCommand ssh -q dal nc %h %p
